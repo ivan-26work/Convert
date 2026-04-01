@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  
+  <!-- PWA -->
+  <meta name="theme-color" content="#0066FF"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="MEGANE_LEARN"/>
+  <link rel="manifest" href="manifest.json"/>
+  
+  <!-- Open Graph / Partage (logo dans les liens) -->
+  <meta property="og:title" content="MEGANE_LEARN - Convertisseur universel"/>
+  <meta property="og:description" content="Convertisseur d'unités : 20 catégories, hors ligne, historique, mode sombre"/>
+  <meta property="og:image" content="https://ivan-26work.github.io/megane_convert/icons/logo.png"/>
+  <meta property="og:image:width" content="512"/>
+  <meta property="og:image:height" content="512"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://ivan-26work.github.io/megane_convert/"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="MEGANE_LEARN - Convertisseur universel"/>
+  <meta name="twitter:description" content="Convertisseur d'unités : 20 catégories, hors ligne, historique, mode sombre"/>
+  <meta name="twitter:image" content="https://ivan-26work.github.io/megane_convert/icons/logo.png"/>
+  
+  <title>Convertisseur - MEGANE_LEARN</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <!-- OVERLAY SIDEBAR -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-title"><i class="fas fa-bolt"></i> MEGANE_LEARN</span>
+    </div>
+    <div class="sidebar-body">
+      <div class="dark-toggle-row">
+        <span class="toggle-label"><i class="fas fa-moon"></i> Mode sombre</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="darkToggle"/>
+          <span class="toggle-thumb"></span>
+        </label>
+      </div>
+      <div class="sidebar-divider"></div>
+      <nav class="sidebar-nav">
+        <button class="sidebar-btn" id="historyBtnSidebar">
+          <i class="fas fa-history"></i>
+          <div class="btn-text">
+            <span class="btn-title">Historique</span>
+            <span class="btn-sub">Tes dernières conversions</span>
+          </div>
+        </button>
+        <button class="sidebar-btn" id="installAppBtn" style="display: none;">
+          <i class="fas fa-download"></i>
+          <div class="btn-text">
+            <span class="btn-title">Installer l’app</span>
+            <span class="btn-sub">Ajouter sur l’écran d’accueil</span>
+          </div>
+        </button>
+        <div id="iosInstallHelp" class="ios-install-help" style="display: none;">
+          <div class="ios-help-card">
+            <i class="fas fa-share-alt"></i>
+            <p><strong>Installer sur iPhone / iPad</strong></p>
+            <ol>
+              <li>Appuie sur <i class="fas fa-share-alt"></i> <strong>Partager</strong></li>
+              <li>Scrolle et choisis <i class="fas fa-plus-square"></i> <strong>Ajouter à l’écran d’accueil</strong></li>
+              <li>Confirme en appuyant sur <strong>Ajouter</strong></li>
+            </ol>
+          </div>
+        </div>
+        <button class="sidebar-btn" id="aboutBtnSidebar">
+          <i class="fas fa-info-circle"></i>
+          <div class="btn-text">
+            <span class="btn-title">À propos</span>
+            <span class="btn-sub">Version 2.0 – PWA</span>
+          </div>
+        </button>
+        <button class="sidebar-btn" id="contactBtnSidebar">
+          <i class="fas fa-envelope"></i>
+          <div class="btn-text">
+            <span class="btn-title">Contact</span>
+            <span class="btn-sub">Support & suggestions</span>
+          </div>
+        </button>
+        <button class="sidebar-btn" id="faqBtnSidebar">
+          <i class="fas fa-question-circle"></i>
+          <div class="btn-text">
+            <span class="btn-title">FAQ</span>
+            <span class="btn-sub">Foire aux questions</span>
+          </div>
+        </button>
+        <button class="sidebar-btn" id="helpBtnSidebar">
+          <i class="fas fa-life-ring"></i>
+          <div class="btn-text">
+            <span class="btn-title">Aide</span>
+            <span class="btn-sub">Guide d’utilisation</span>
+          </div>
+        </button>
+        <button class="sidebar-btn" id="privacyBtnSidebar">
+          <i class="fas fa-lock"></i>
+          <div class="btn-text">
+            <span class="btn-title">Confidentialité</span>
+            <span class="btn-sub">Vos données, localement</span>
+          </div>
+        </button>
+      </nav>
+      <div class="favorites-section" id="favoritesSection"></div>
+    </div>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="circuit-title"><i class="fas fa-exchange-alt"></i> Convertisseur d'unités</span>
+      <button class="logo-btn" id="logoBtn">
+        <img src="icons/logo.png" alt="MEGANE_LEARN">
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content" id="mainContent">
+    <div id="converterView">
+      <!-- CADRE RÉSULTAT -->
+      <div class="converter-card output-card">
+        <div class="card-header" id="outputHeader">
+          <i class="fas fa-arrow-right-to-bracket"></i> Résultat
+          <div class="header-actions">
+            <button class="header-action-btn" id="copyResultBtn" title="Copier la conversion">
+              <i class="fas fa-copy"></i>
+            </button>
+            <button class="header-action-btn" id="compareBtn" title="Comparer avec d'autres unités">
+              <i class="fas fa-chart-simple"></i>
+            </button>
+          </div>
+        </div>
+        <div class="units-scroll" id="outputUnits"></div>
+        <div id="resultDisplayArea">
+          <div class="result-display" id="normalResultDisplay">
+            <span class="result-value" id="resultValue">0</span>
+          </div>
+          <div class="comparison-scroll-container" id="comparisonContainer" style="display: none;">
+            <div class="comparison-scroll" id="comparisonScroll"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CADRE ENTRÉE -->
+      <div class="converter-card input-card">
+        <div class="card-header" id="inputHeader">
+          <i class="fas fa-arrow-left-from-bracket"></i> convert
+          <span class="selected-unit" id="inputSelectedUnit">V</span>
+        </div>
+        <div class="units-scroll" id="inputUnits"></div>
+        <div class="input-group">
+          <input type="number" id="inputValue" class="value-input" value="0" step="any" placeholder="0"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- VUE HISTORIQUE -->
+    <div id="historyView" style="display: none;">
+      <div class="history-header">
+        <button class="history-back-btn" id="historyBackBtn">
+          <i class="fas fa-arrow-left"></i> Retour
+        </button>
+        <h2 class="history-title"><i class="fas fa-history"></i> Historique des conversions</h2>
+        <button class="history-clear-btn" id="clearHistoryBtn">
+          <i class="fas fa-trash-alt"></i> Tout effacer
+        </button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+  </main>
+
+  <!-- MODALE COMPARAISON -->
+  <div id="compareModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-chart-simple"></i> Sélectionner les unités à comparer</h3>
+        <button class="modal-close" id="closeModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-info">Choisissez jusqu'à 3 unités (la plus ancienne sera remplacée)</p>
+        <div class="units-selection-grid" id="unitsSelectionGrid"></div>
+        <div class="selected-count">
+          <span id="selectedCount">0</span> / 3 unités sélectionnées
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn modal-btn-primary" id="validateCompareBtn">Valider</button>
+        <button class="modal-btn modal-btn-secondary" id="cancelCompareBtn">Annuler</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER NAV -->
+  <footer class="footer-nav">
+    <div class="nav-inner-scroll" id="conversionNav"></div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('✅ SW enregistré'))
+        .catch(err => console.log('❌ Erreur SW:', err));
+    }
+  </script>
+</body>
+</html>
