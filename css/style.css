@@ -1146,3 +1146,125 @@ body {
 .voice-status.success {
   color: var(--green);
 }
+/* ========== iOS SPECIFIC FIXES ========== */
+
+/* 1. Détection iOS (classe ajoutée par JS) */
+.ios-device {
+  /* Ajustements globaux pour iOS */
+}
+
+/* 2. Correction du viewport pour éviter le zoom automatique sur input */
+.ios-device input,
+.ios-device select,
+.ios-device textarea {
+  font-size: 16px !important;
+}
+
+/* 3. Suppression du style par défaut des boutons sur iOS */
+.ios-device button,
+.ios-device .sidebar-btn,
+.ios-device .header-action-btn,
+.ios-device .modal-btn,
+.ios-device .unit-btn,
+.ios-device .conversion-nav-btn {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 60px;
+}
+
+/* 4. Gestion des safe areas (encoche) */
+.ios-device .site-header {
+  padding-top: max(12px, env(safe-area-inset-top));
+}
+
+.ios-device .footer-nav {
+  bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+.ios-device .main-content {
+  padding-bottom: max(90px, env(safe-area-inset-bottom));
+}
+
+/* 5. Scroll fluide sur iOS */
+.ios-device {
+  -webkit-overflow-scrolling: touch;
+}
+
+.ios-device .sidebar {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 6. Accélération matérielle pour éviter les flous */
+.ios-device .converter-card,
+.ios-device .sidebar,
+.ios-device .modal-content,
+.ios-device .header-inner {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* 7. Correction des icônes (antialiasing) */
+.ios-device i,
+.ios-device .fas,
+.ios-device .far {
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+/* 8. Ajustement pour le bouton de partage iOS */
+.ios-device .ios-install-help {
+  background: rgba(0, 102, 255, 0.1);
+  border-radius: 24px;
+  padding: 12px;
+  margin-top: 16px;
+}
+
+.ios-device .ios-help-card {
+  background: var(--surface);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: var(--card-shadow);
+}
+
+/* 9. Correction des ombres sur iOS (évite l'effet flou) */
+.ios-device .converter-card,
+.ios-device .sidebar,
+.ios-device .modal-content {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 10. Fix pour le status bar iOS (noir ou clair) */
+.ios-device .site-header {
+  background: var(--bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* 11. Évite le zoom sur double-tap */
+.ios-device button,
+.ios-device .sidebar-btn,
+.ios-device .unit-btn {
+  touch-action: manipulation;
+}
+
+/* 12. Correction des polices pour iOS */
+.ios-device {
+  font-family: -apple-system, BlinkMacSystemFont, 'Nunito', sans-serif;
+}
+
+/* 13. Ajustement pour les modales (évite le scroll arrière) */
+.ios-device .modal-open {
+  position: fixed;
+  width: 100%;
+}
+
+/* 14. Correction du focus outline pour iOS */
+.ios-device :focus {
+  outline: none;
+}
+
+.ios-device button:focus-visible,
+.ios-device .sidebar-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  }
